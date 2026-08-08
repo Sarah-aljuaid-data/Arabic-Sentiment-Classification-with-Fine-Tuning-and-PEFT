@@ -1,4 +1,4 @@
-# Full Fine-Tuning vs. Parameter-Efficient Adaptation for Arabic Sentiment Classification
+# Performance and Computational Cost of Full Fine-Tuning and Parameter-Efficient Adaptation for Arabic Sentiment Classification Across Training-Set Sizes.
 
 > A unified comparison of Full Fine-Tuning, Frozen Backbone, LoRA, and QLoRA for Arabic sentiment classification across different training-set sizes.
 
