@@ -215,6 +215,5 @@ If you use the HARD dataset, please cite the original dataset paper:
 
 
 
-## License
 
 This repository is provided for academic and research purposes.
