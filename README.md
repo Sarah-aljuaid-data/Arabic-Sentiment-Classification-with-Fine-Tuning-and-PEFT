@@ -138,22 +138,12 @@ The experiments highlight several differences between the adaptation strategies:
 
 ## Repository Structure
 
+
 ```text
 .
-├── data/
-│   └── ...
-│
-├── code/
-│   └── ...
-│
-├── figures/
-│   ├── experimental_design.png
-│   ├── macro_f1_trends.png
-│   ├── tradeoff_100_per_class.png
-│   └── tradeoff_25_per_class.png
-│
+├── HARD Dataset.zip
+├── Fine_Tuning_and_PEFT_Arabic_Sentiment.ipynb
 └── README.md
-```
 
 ### `data/`
 
@@ -175,22 +165,6 @@ Contains the complete experimental pipeline, including:
 - Statistical analysis
 - Result visualization
 
-## Reproducing the Experiments
-
-The experiments were developed in **Google Colab** using a CUDA-enabled GPU environment.
-
-Install the required libraries before running the experiment:
-
-```bash
-pip install transformers
-pip install datasets
-pip install accelerate
-pip install peft
-pip install bitsandbytes
-pip install scikit-learn
-pip install scipy
-```
-
 
 ## Dataset Citation
 
@@ -209,9 +183,6 @@ If you use the HARD dataset, please cite the original dataset paper:
   doi       = {10.1007/978-3-319-67056-0_3}
 }
 ```
-
-
-## Citation
 
 
 
