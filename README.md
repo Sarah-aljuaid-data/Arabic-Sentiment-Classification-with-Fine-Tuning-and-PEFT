@@ -175,11 +175,6 @@ Contains the complete experimental pipeline, including:
 - Statistical analysis
 - Result visualization
 
-### `figures/`
-
-Contains the figures generated from the experimental results and used for visualizing performance and computational trade-offs.
-
-
 ## Reproducing the Experiments
 
 The experiments were developed in **Google Colab** using a CUDA-enabled GPU environment.
