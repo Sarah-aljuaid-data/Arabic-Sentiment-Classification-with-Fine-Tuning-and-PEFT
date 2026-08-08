@@ -1,6 +1,6 @@
 # Full Fine-Tuning vs. Parameter-Efficient Adaptation for Arabic Sentiment Classification
 
-> A controlled comparison of Full Fine-Tuning, Frozen Backbone, LoRA, and QLoRA for Arabic sentiment classification across different training-set sizes.
+> A unified comparison of Full Fine-Tuning, Frozen Backbone, LoRA, and QLoRA for Arabic sentiment classification across different training-set sizes.
 
 This repository contains the dataset preparation, experimental code, and results used to compare four adaptation strategies for Arabic binary sentiment classification using **CAMeLBERT-Mix**.
 
@@ -18,22 +18,6 @@ Each method is evaluated using the same experimental framework across three trai
 - Full training dataset
 - 100 samples per class
 - 25 samples per class
-
-
-## Study at a Glance
-
-| Setting | Description |
-|---|---|
-| **Task** | Arabic Binary Sentiment Classification |
-| **Dataset** | Hotel Arabic Reviews Dataset (HARD) |
-| **Pre-trained Model** | CAMeLBERT-Mix |
-| **Methods** | Full Fine-Tuning, Frozen Backbone, LoRA, QLoRA |
-| **Training-Data Levels** | Full Dataset, 100/Class, 25/Class |
-| **Random Seeds** | 5 |
-| **Primary Performance Metric** | Macro-F1 |
-| **Additional Metrics** | Accuracy, Macro Precision, Macro Recall |
-| **Efficiency Metrics** | Peak GPU Memory, Training Time, Trainable Parameters |
-| **Total Experimental Runs** | 60 |
 
 
 ## Dataset
@@ -68,18 +52,6 @@ The complete dataset is divided using a **stratified 80/10/10 split** to preserv
 
 The validation and test sets remain fixed throughout the experiments so that all adaptation methods are evaluated using the same data partitions.
 
-
-## Training-Data Conditions
-
-To examine the effect of labeled-data availability, the four adaptation methods are evaluated at three training-data levels.
-
-| Training Condition | Negative | Positive | Total Training Samples |
-|---|---:|---:|---:|
-| **Full Dataset** | 42,279 | 42,279 | **84,558** |
-| **100 / Class** | 100 | 100 | **200** |
-| **25 / Class** | 25 | 25 | **50** |
-
-The reduced-data subsets are sampled from the original training split while the validation and test sets remain unchanged.
 
 
 ## Experimental Design
@@ -150,20 +122,6 @@ The same general training configuration is maintained across the adaptation meth
 The maximum sequence length was selected from the token-length distribution of the training dataset and then fixed across all experiments.
 
 
-## Evaluation
-
-The comparison considers three complementary aspects of model adaptation.
-
-### Classification Performance
-
-The following metrics are reported:
-
-- Accuracy
-- Macro Precision
-- Macro Recall
-- Macro-F1
-
-**Macro-F1** is used as the primary classification metric.
 
 ### Computational Efficiency
 
@@ -172,50 +130,6 @@ The computational cost of each adaptation strategy is evaluated using:
 - Number of trainable parameters
 - Peak GPU memory
 - Training time
-
-### Stability
-
-Each experimental condition is repeated using five random seeds:
-
-`42, 123, 456, 789, 2024`
-
-Results are summarized using the **mean**, **sample standard deviation**, and **95% confidence intervals** across runs.
-
-
-## Results
-
-### Performance Across Training-Set Sizes
-
-The following figure summarizes the change in Macro-F1 as the amount of training data is reduced.
-
-<p align="center">
-  <img src="figures/macro_f1_trends.png" width="800">
-</p>
-
-The experiments show a clear change in the relative behavior of the adaptation methods as the amount of labeled training data decreases.
-
-At the full-data level, Full Fine-Tuning, LoRA, and QLoRA achieve closely grouped Macro-F1 performance, whereas the Frozen Backbone performs substantially lower.
-
-Under the reduced-data conditions, Full Fine-Tuning retains considerably stronger classification performance, while the parameter-efficient approaches experience larger performance degradation.
-
-
-### Performance–Cost Trade-Off
-
-Performance alone does not capture the computational differences between the adaptation strategies. The following figures compare Macro-F1 against peak GPU memory under the two reduced-data conditions.
-
-#### 100 Samples per Class
-
-<p align="center">
-  <img src="figures/tradeoff_100_per_class.png" width="720">
-</p>
-
-#### 25 Samples per Class
-
-<p align="center">
-  <img src="figures/tradeoff_25_per_class.png" width="720">
-</p>
-
-These comparisons illustrate the trade-off between predictive performance and GPU-memory requirements as the amount of labeled training data decreases.
 
 
 ## Key Findings
@@ -289,44 +203,6 @@ pip install bitsandbytes
 pip install scikit-learn
 pip install scipy
 ```
-
-The experimental code then performs the complete pipeline from dataset preparation to final evaluation.
-
-For every adaptation strategy, experiments are conducted across:
-
-```text
-Full Dataset
-├── Seed 42
-├── Seed 123
-├── Seed 456
-├── Seed 789
-└── Seed 2024
-
-100 Samples / Class
-├── Seed 42
-├── Seed 123
-├── Seed 456
-├── Seed 789
-└── Seed 2024
-
-25 Samples / Class
-├── Seed 42
-├── Seed 123
-├── Seed 456
-├── Seed 789
-└── Seed 2024
-```
-
-The same procedure is repeated for:
-
-```text
-Full Fine-Tuning
-Frozen Backbone
-LoRA
-QLoRA
-```
-
-producing **60 experimental runs** in total.
 
 
 ## Dataset Citation
