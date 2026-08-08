@@ -58,14 +58,6 @@ The validation and test sets remain fixed throughout the experiments so that all
 
 The experimental framework combines **four adaptation strategies** with **three training-data levels**, resulting in **12 experimental conditions**.
 
-Each condition is repeated across **five random seeds**, producing a total of:
-
-**4 methods × 3 data levels × 5 seeds = 60 experimental runs**
-
-<p align="center">
-  <img src="figures/experimental_design.png" width="850">
-</p>
-
 All methods are evaluated using the same:
 
 - Dataset partitions
