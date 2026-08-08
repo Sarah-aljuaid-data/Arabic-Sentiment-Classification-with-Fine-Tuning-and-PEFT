@@ -80,20 +80,20 @@ CAMeLBERT-Mix was selected because its pre-training data covers multiple varieti
 The model is used as the common backbone for all four adaptation strategies.
 
 
-## Adaptation Methods
+## Adaptation Strategies
 
-Four strategies are compared under the same experimental framework.
+Four adaptation strategies are compared under the same experimental framework.
 
 | Method | Trainable Components | Quantization | Main Configuration |
 |---|---|---|---|
-| **Full Fine-Tuning** | Entire model | None | All model parameters updated |
-| **Frozen Backbone** | Classification head only | None | Pre-trained encoder frozen |
-| **LoRA** | Low-rank adapters | None | r=16, α=32, dropout=0.1 |
-| **QLoRA** | Low-rank adapters | 4-bit NF4 | r=16, α=32, dropout=0.1 |
+| **Full Fine-Tuning** | All model parameters | None | All model parameters are updated |
+| **Frozen Backbone** | Classification head only | None | Pre-trained encoder is frozen |
+| **LoRA** | Low-rank adaptation parameters | None | r=16, α=32, dropout=0.1, target modules: query and value |
+| **QLoRA** | Low-rank adaptation parameters | 4-bit NF4 | r=16, α=32, dropout=0.1, target modules: query and value |
 
-For LoRA and QLoRA, the adapters are applied to the **query** and **value** attention projection modules.
+For LoRA, low-rank adaptation is applied to the query and value attention projection modules.
 
-QLoRA additionally uses 4-bit NF4 quantization and a quantization-compatible optimizer.
+For QLoRA, the base model is quantized using 4-bit NF4, with double quantization disabled and FP16 used as the computation data type. The LoRA configuration uses the same rank, alpha, dropout, and target modules as LoRA, with `paged_adamw_8bit` used as the optimizer.
 
 
 ## Training Configuration
