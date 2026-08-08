@@ -1,4 +1,11 @@
 # PEFT-for-Arabic-Sentiment-Classification
+
+## Description
+
+This repository contains the implementation of a comparative study of model adaptation strategies for Arabic sentiment classification.
+
+The study compares Full Fine-Tuning, Frozen Backbone, LoRA, and QLoRA using CAMeLBERT-Mix as the pretrained language model. The methods are evaluated under full-data and reduced-data conditions to compare their classification performance and computational efficiency.
+
 ## Dataset
 
 The experiments are conducted using the Hotel Arabic Reviews Dataset (HARD).
@@ -6,30 +13,84 @@ The experiments are conducted using the Hotel Arabic Reviews Dataset (HARD).
 For binary sentiment classification, reviews with ratings 1 and 2 are labeled as negative, while reviews with ratings 4 and 5 are labeled as positive. Neutral reviews are excluded.
 
 The dataset is divided using a stratified 80/10/10 split:
+
 - 80% for training
 - 10% for validation
 - 10% for testing
 
 A fixed split seed of 42 is used to ensure reproducibility.
 
-
-
-Three training-data conditions are evaluated:
-- Full training dataset
-- 100 samples per class
-- 25 samples per class
-
 In addition to the full training dataset, two reduced-data conditions are evaluated:
+
 - 25 samples per class
 - 100 samples per class
-
-The reduced-data subsets are sampled from the training split only, while the validation and test sets remain unchanged across all experiments.
 
 ## Methods
 
 Four model adaptation strategies are compared:
 
 - **Full Fine-Tuning:** All model parameters are updated during training.
-- **Frozen Backbone:** The pretrained backbone is frozen, and only the classification head is trained.
-- **LoRA:** Low-Rank Adaptation is applied to selected attention modules while keeping the pretrained backbone frozen.
-- **QLoRA:** LoRA is combined with 4-bit quantization to reduce memory requirements during training.
+- **Frozen Backbone:** The pretrained encoder is frozen and only the classification head is trained.
+- **LoRA (Low-Rank Adaptation):** Low-rank trainable matrices are introduced while the pretrained backbone remains frozen.
+- **QLoRA (Quantized Low-Rank Adaptation):** LoRA is combined with 4-bit quantization to reduce memory requirements during training.
+
+All methods use CAMeLBERT-Mix as the pretrained backbone and are evaluated under the same experimental framework.
+
+## Evaluation
+
+The methods are evaluated using the following classification and computational metrics:
+
+- Accuracy
+- Macro-F1
+- Macro Precision
+- Macro Recall
+- Training time
+- Peak GPU memory usage
+- Inference time
+
+Experiments are repeated across five random seeds, and the results are summarized using the mean, sample standard deviation, and Student's *t*-based 95% confidence interval.
+
+## Results
+
+The experiments compare the performance and computational efficiency of the four adaptation strategies across the full training dataset and the two reduced-data conditions.
+
+The main comparison focuses on how the amount of available training data affects the relative performance of Full Fine-Tuning, Frozen Backbone, LoRA, and QLoRA.
+
+## Repository Contents
+
+The repository includes:
+
+- **`PEFT_for_Arabic_Sentiment_Classification.ipynb`** — Main notebook containing data preparation, model training, evaluation, statistical analysis, and result visualization.
+- **`HARD Dataset.zip`** — Dataset used in the experiments.
+- **`README.md`** — Project description and repository documentation.
+
+## Reproducibility
+
+The experiments are implemented in Python using PyTorch and the Hugging Face ecosystem.
+
+The notebook contains the complete experimental pipeline, including:
+
+- Dataset preprocessing and splitting
+- Reduced-data sampling
+- Full Fine-Tuning
+- Frozen-Backbone training
+- LoRA
+- QLoRA
+- Model evaluation
+- Statistical analysis
+- Result visualization
+
+## Dataset Citation
+
+If you use the HARD dataset, please cite:
+
+Elnagar, A., Khalifa, Y. S., & Einea, A. (2018).  
+Hotel Arabic-Reviews Dataset Construction for Sentiment Analysis Applications.  
+In *Intelligent Natural Language Processing: Trends and Applications*,  
+Studies in Computational Intelligence, Vol. 740, pp. 35–52.  
+Springer International Publishing.  
+DOI: 10.1007/978-3-319-67056-0_3
+
+## License
+
+Please refer to the original HARD dataset source for its dataset usage and licensing conditions.
