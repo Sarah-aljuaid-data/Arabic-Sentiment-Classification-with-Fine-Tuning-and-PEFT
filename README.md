@@ -8,23 +8,36 @@ The study compares Full Fine-Tuning, Frozen Backbone, LoRA, and QLoRA using CAMe
 
 ## Dataset
 
-The experiments are conducted using the Hotel Arabic Reviews Dataset (HARD).
+T## Dataset
 
-For binary sentiment classification, reviews with ratings 1 and 2 are labeled as negative, while reviews with ratings 4 and 5 are labeled as positive. Neutral reviews are excluded.
+The experiments use the Hotel Arabic Reviews Dataset (HARD) for binary Arabic sentiment classification. Reviews with ratings 1 and 2 are labeled as negative, while ratings 4 and 5 are labeled as positive. Neutral reviews are excluded.
+
+The resulting dataset contains 105,698 reviews, equally distributed between the two sentiment classes.
+
+| Class | Number of Reviews |
+|------|------------------:|
+| Negative | 52,849 |
+| Positive | 52,849 |
+| **Total** | **105,698** |
 
 The dataset is divided using a stratified 80/10/10 split:
 
-- 80% for training
-- 10% for validation
-- 10% for testing
+| Split | Percentage | Number of Samples |
+|------|-----------:|------------------:|
+| Training | 80% | 84,558 |
+| Validation | 10% | 10,570 |
+| Test | 10% | 10,570 |
+| **Total** | **100%** | **105,698** |
 
-A fixed split seed of 42 is used to ensure reproducibility.
+In addition to the full training set, two reduced-data conditions are evaluated to examine model adaptation under limited training data:
 
-In addition to the full training dataset, two reduced-data conditions are evaluated:
+| Training Condition | Samples per Class | Total Training Samples |
+|-------------------|------------------:|-----------------------:|
+| Full Dataset | 42,279 | 84,558 |
+| 100 per Class | 100 | 200 |
+| 25 per Class | 25 | 50 |
 
-- 25 samples per class
-- 100 samples per class
-
+The reduced-data subsets are sampled from the training split only, while the validation and test sets remain fixed across experiments.
 ## Methods
 
 Four model adaptation strategies are compared:
