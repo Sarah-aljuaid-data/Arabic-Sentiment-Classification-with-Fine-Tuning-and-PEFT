@@ -2,7 +2,7 @@
 
 > A unified comparison of Full Fine-Tuning, Frozen Backbone, LoRA, and QLoRA for Arabic sentiment classification across different training-set sizes.
 
-This repository contains the dataset preparation, experimental code, and results used to compare four adaptation strategies for Arabic binary sentiment classification using **CAMeLBERT-Mix**.
+This repository contains the dataset preparation, experimental code used to compare four adaptation strategies for Arabic binary sentiment classification using **CAMeLBERT-Mix**.
 
 The study evaluates how the methods behave when the amount of labeled training data changes from the complete training dataset to substantially reduced-data settings.
 
