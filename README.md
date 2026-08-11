@@ -4,6 +4,8 @@
 
 This repository contains the dataset preparation, experimental code used to compare four adaptation strategies for Arabic binary sentiment classification using **CAMeLBERT-Mix**.
 
+The complete implementation developed for this study is available on Google Colab: https://colab.research.google.com/drive/1U97nGbuSEP43_c9ove-sIBUFihiVJVeK?usp=sharing
+
 The study evaluates how the methods behave when the amount of labeled training data changes from the complete training dataset to substantially reduced-data settings.
 
 The following adaptation strategies are evaluated:
